@@ -1,0 +1,13 @@
+[2025-07-30T11:44:26.527Z] ADMIN unknown: Created a product at /api/product/add-product
+[2025-07-30T13:57:58.327Z] ADMIN unknown: Created a product at /api/product/add-product
+[2025-07-30T14:00:54.853Z] ADMIN unknown: Created a product at /api/product/add-product
+[2025-07-30T14:02:45.324Z] ADMIN unknown: Created a product at /api/product/add-product
+[2025-07-30T14:05:18.214Z] ADMIN unknown: Created a product at /api/product/add-product
+[2025-07-30T14:07:28.671Z] ADMIN unknown: Created a product at /api/product/add-product
+[2025-07-30T14:11:38.013Z] ADMIN unknown: Deleted a product at /api/product/delete-product
+[2025-07-30T14:11:44.239Z] ADMIN unknown: Deleted a product at /api/product/delete-product
+[2025-07-30T14:11:46.648Z] ADMIN unknown: Deleted a product at /api/product/delete-product
+[2025-07-30T14:15:35.023Z] ADMIN unknown: Created a product at /api/product/add-product
+[2025-07-30T14:20:41.732Z] ADMIN unknown: Created a product at /api/product/add-product
+[2025-07-30T14:23:28.488Z] ADMIN unknown: Created a product at /api/product/add-product
+[2025-07-30T14:24:17.422Z] ADMIN unknown: Edited a product at /api/product/edit-product
