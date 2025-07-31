@@ -22,7 +22,6 @@ const customizeRouter = require("./routes/customize");
 const { loginCheck } = require("./middleware/auth");
 const CreateAllFolder = require("./config/uploadFolderCreateScript");
 
-// Create folders for uploads if they don't exist
 CreateAllFolder();
 
 // Connect to MongoDB
@@ -37,10 +36,17 @@ mongoose
   )
   .catch((err) => console.log("Database connection failed:", err));
 
+// CORS options - allow only your frontend origin
+const corsOptions = {
+  origin: "https://localhost:3000",  
+  credentials: true,                 
+};
+
+app.use(cors(corsOptions));
+
 // Middleware
 app.use(morgan("dev"));
 app.use(cookieParser());
-app.use(cors());
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -63,5 +69,5 @@ const sslOptions = {
 // Start HTTPS server
 const PORT = process.env.PORT || 8000;
 https.createServer(sslOptions, app).listen(PORT, () => {
-  console.log(`✅ HTTPS server running at https://localhost:${PORT}`);
+  console.log(`HTTPS server running at https://localhost:${PORT}`);
 });
