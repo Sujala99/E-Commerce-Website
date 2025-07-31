@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 
 dotenv.config();
 
@@ -36,15 +38,34 @@ mongoose
   )
   .catch((err) => console.log("Database connection failed:", err));
 
-// CORS options - allow only your frontend origin
+// CORS configuration
 const corsOptions = {
-  origin: "https://localhost:3000",  
-  credentials: true,                 
+  origin: "https://localhost:3000", // Your frontend URL
+  credentials: true, // Allow credentials (cookies, sessions)
 };
-
 app.use(cors(corsOptions));
 
-// Middleware
+// Session Management Middleware
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "your_secure_session_secret",
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.DATABASE,
+      collectionName: "sessions",
+      ttl: 14 * 24 * 60 * 60, // 14 days in seconds
+    }),
+    cookie: {
+      secure: true, // true if HTTPS is enabled (recommended for production)
+      httpOnly: true,
+      sameSite: "lax",
+      maxAge: 14 * 24 * 60 * 60 * 1000, // 14 days in ms
+    },
+  })
+);
+
+// General Middleware
 app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(express.static("public"));

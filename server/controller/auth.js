@@ -1,14 +1,12 @@
 const { toTitleCase, validateEmail } = require("../config/function");
 const bcrypt = require("bcryptjs");
 const userModel = require("../models/users");
-const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = require("../config/keys");
 const { logToFile } = require("../utils/logger");
 const sendEmail = require("../utils/sendMail");
 
 const MAX_FAILED_ATTEMPTS = 5;
 const LOCK_TIME_MINUTES = 15;
-const TOKEN_EXPIRES_IN = "30m";
+const SESSION_EXPIRES_IN_MS = 24 * 60 * 60 * 1000; // 24 hours
 const PASSWORD_HISTORY_LIMIT = 5;
 const PASSWORD_EXPIRES_IN_DAYS = 90;  // Password expires after 90 days
 
@@ -45,7 +43,7 @@ class Auth {
         password: hashed,
         userRole: userRole || 0,
         oldPasswords: [hashed],
-        passwordLastChanged: Date.now(),  // Set password last changed date
+        passwordLastChanged: Date.now(),  
       });
 
       await newUser.save();
@@ -98,19 +96,41 @@ class Auth {
       user.lockUntil = null;
       await user.save();
 
-      const token = jwt.sign(
-        { _id: user._id, role: user.userRole },
-        JWT_SECRET,
-        { expiresIn: TOKEN_EXPIRES_IN }
-      );
+      // Save user session with 24 hour expiry
+      req.session.user = {
+        _id: user._id,
+        email: user.email,
+        role: user.userRole,
+      };
 
-      logToFile(`User logged in: ${email}, ID: ${user._id}`);
+      // Set session cookie max age to 24 hours
+      req.session.cookie.maxAge = SESSION_EXPIRES_IN_MS;
 
-      return res.json({ token, user: { _id: user._id, role: user.userRole } });
+      logToFile(`User logged in (session): ${email}, ID: ${user._id}`);
+
+      return res.json({
+        success: "Logged in successfully",
+        user: {
+          _id: user._id,
+          email: user.email,
+          role: user.userRole,
+        },
+      });
     } catch (err) {
       console.log(err);
       return res.status(500).json({ error: "Server error" });
     }
+  }
+
+  async logout(req, res) {
+    req.session.destroy((err) => {
+      if (err) {
+        console.error("Session destroy error:", err);
+        return res.status(500).json({ error: "Logout failed" });
+      }
+      res.clearCookie("connect.sid");
+      return res.json({ success: "Logged out successfully" });
+    });
   }
 
   async verifyOtp(req, res) {
@@ -201,7 +221,7 @@ class Auth {
 
     const hashed = bcrypt.hashSync(newPassword, 10);
     user.password = hashed;
-    user.passwordLastChanged = Date.now(); // Update last changed date
+    user.passwordLastChanged = Date.now(); 
     user.oldPasswords.unshift(hashed);
     user.oldPasswords = user.oldPasswords.slice(0, PASSWORD_HISTORY_LIMIT);
     await user.save();
