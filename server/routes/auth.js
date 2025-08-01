@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const { body } = require("express-validator");
+const rateLimit = require("express-rate-limit");
 
 const authController = require("../controller/auth"); 
 const {
@@ -8,8 +10,16 @@ const {
   isAdmin,
 } = require("../middleware/auth");
 
-
-const { body } = require("express-validator");
+// Rate limiter for signin route
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5,
+  message: {
+    error: "Too many login attempts. Please try again after 15 minutes.",
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 router.post(
   "/signup",
@@ -24,7 +34,9 @@ router.post(
   ],
   authController.postSignup
 );
-outer.post("/signin", authController.postSignin);
+
+router.post("/signin", loginLimiter, authController.postSignin);
+
 router.post("/forgot-password", authController.forgotPassword);
 router.post("/verify-otp", authController.verifyOtp);
 router.post("/reset-password", authController.resetPassword);
