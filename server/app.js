@@ -54,13 +54,13 @@ app.use(
     store: MongoStore.create({
       mongoUrl: process.env.DATABASE,
       collectionName: "sessions",
-      ttl: 14 * 24 * 60 * 60, // 14 days in seconds
+      ttl: 14 * 24 * 60 * 60, 
     }),
     cookie: {
-      secure: true, // true if HTTPS is enabled (recommended for production)
+      secure: true, 
       httpOnly: true,
       sameSite: "lax",
-      maxAge: 14 * 24 * 60 * 60 * 1000, // 14 days in ms
+      maxAge: 14 * 24 * 60 * 60 * 1000,
     },
   })
 );
@@ -71,6 +71,12 @@ app.use(cookieParser());
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+
+
+const helmet = require("helmet");
+
+app.use(helmet());
 
 // Routes
 app.use("/api", authRouter);
