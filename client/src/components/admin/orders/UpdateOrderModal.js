@@ -31,7 +31,7 @@ const UpdateOrderModal = (props) => {
     if (responseData.error) {
       dispatch({ type: "loading", payload: false });
     } else if (responseData.success) {
-      console.log(responseData.success);
+      // console.log(responseData.success);
       dispatch({ type: "updateOrderModalClose" });
       fetchData();
       dispatch({ type: "loading", payload: false });

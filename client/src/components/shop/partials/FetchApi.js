@@ -15,6 +15,5 @@ export const cartListProduct = async () => {
     });
     return res.data;
   } catch (error) {
-    console.log(error);
   }
 };

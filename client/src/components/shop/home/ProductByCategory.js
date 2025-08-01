@@ -136,7 +136,6 @@ const PageComponent = () => {
         setProducts(responseData.Products);
       }
     } catch (error) {
-      console.log(error);
     }
   };
 

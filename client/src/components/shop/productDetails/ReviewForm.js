@@ -31,13 +31,10 @@ const ReviewForm = (props) => {
           type: "singleProductDetail",
           payload: responseData.Product,
         });
-        console.log(data);
       }
       if (responseData.error) {
-        console.log(responseData.error);
       }
     } catch (error) {
-      console.log(error);
     }
   };
 

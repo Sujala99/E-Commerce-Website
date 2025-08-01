@@ -6,7 +6,7 @@ export const DashboardData = async () => {
     let res = await axios.post(`${apiURL}/api/customize/dashboard-data`);
     return res.data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -15,7 +15,7 @@ export const getSliderImages = async () => {
     let res = await axios.get(`${apiURL}/api/customize/get-slide-image`);
     return res.data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -27,7 +27,7 @@ export const postUploadImage = async (formData) => {
     );
     return res.data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -38,6 +38,6 @@ export const postDeleteImage = async (id) => {
     });
     return res.data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };

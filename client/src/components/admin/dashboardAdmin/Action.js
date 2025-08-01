@@ -27,7 +27,7 @@ export const sliderImages = async (dispatch) => {
       dispatch({ type: "sliderImages", payload: responseData.Images });
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -42,7 +42,7 @@ export const deleteImage = async (id, dispatch) => {
       }, 1000);
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -50,7 +50,7 @@ export const uploadImage = async (image, dispatch) => {
   dispatch({ type: "imageUpload", payload: true });
   let formData = new FormData();
   formData.append("image", image);
-  console.log(formData.get("image"));
+  // console.log(formData.get("image"));
   try {
     let responseData = await postUploadImage(formData);
     if (responseData && responseData.success) {
@@ -60,6 +60,6 @@ export const uploadImage = async (image, dispatch) => {
       }, 1000);
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };

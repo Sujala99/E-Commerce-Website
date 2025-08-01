@@ -77,7 +77,7 @@ class User {
         updatedAt: Date.now(),
       });
       currentUser.exec((err, result) => {
-        if (err) console.log(err);
+        // if (err) console.log(err);
         return res.json({ success: "User updated successfully" });
       });
     }
@@ -93,7 +93,7 @@ class User {
         updatedAt: Date.now(),
       });
       currentUser.exec((err, result) => {
-        if (err) console.log(err);
+        // if (err) console.log(err);
         return res.json({ success: "User updated successfully" });
       });
     }
@@ -117,7 +117,6 @@ class User {
             password: newPassword,
           });
           passChange.exec((err, result) => {
-            if (err) console.log(err);
             return res.json({ success: "Password updated successfully" });
           });
         } else {

@@ -66,9 +66,8 @@ const EditProductModal = (props) => {
   const submitForm = async (e) => {
     e.preventDefault();
     if (!editformData.pEditImages) {
-      console.log("Image Not upload=============", editformData);
     } else {
-      console.log("Image uploading");
+      // console.log("Image uploading");
     }
     try {
       let responseData = await editProduct(editformData);
@@ -91,7 +90,6 @@ const EditProductModal = (props) => {
         }, 2000);
       }
     } catch (error) {
-      console.log(error);
     }
   };
 

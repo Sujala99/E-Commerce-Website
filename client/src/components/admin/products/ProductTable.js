@@ -33,9 +33,7 @@ const AllProduct = (props) => {
   const deleteProductReq = async (pId) => {
     let deleteC = await deleteProduct(pId);
     if (deleteC.error) {
-      console.log(deleteC.error);
     } else if (deleteC.success) {
-      console.log(deleteC.success);
       fetchData();
     }
   };

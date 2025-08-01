@@ -33,13 +33,10 @@ const AllReviews = (props) => {
         });
       }
       if (responseData.error) {
-        console.log(responseData.error);
       }
     } catch (error) {
-      console.log(error);
     }
   };
-  console.log(pRatingsReviews);
   return (
     <Fragment>
       <div className="md:mx-16 lg:mx-20 xl:mx-24 flex flex-col">

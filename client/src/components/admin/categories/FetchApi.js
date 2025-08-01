@@ -18,7 +18,7 @@ export const getAllCategory = async () => {
     let res = await axios.get(`${apiURL}/api/category/all-category`, Headers());
     return res.data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -58,7 +58,7 @@ export const editCategory = async (cId, des, status) => {
     );
     return res.data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -71,6 +71,6 @@ export const deleteCategory = async (cId) => {
     );
     return res.data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };

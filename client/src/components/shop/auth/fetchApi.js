@@ -15,7 +15,6 @@ export const loginReq = async ({ email, password }) => {
     let res = await axios.post(`${apiURL}/api/signin`, data);
     return res.data;
   } catch (error) {
-    console.log(error);
   }
 };
 
@@ -25,6 +24,5 @@ export const signupReq = async ({ name, email, password, cPassword }) => {
     let res = await axios.post(`${apiURL}/api/signup`, data);
     return res.data;
   } catch (error) {
-    console.log(error);
   }
 };

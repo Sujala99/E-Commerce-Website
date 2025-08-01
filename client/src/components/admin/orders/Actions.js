@@ -17,14 +17,14 @@ export const fetchData = async (dispatch) => {
 /* This method call the editmodal & dispatch category context */
 export const editOrderReq = (oId, type, status, dispatch) => {
   if (type) {
-    console.log("click update");
+    // console.log("click update");
     dispatch({ type: "updateOrderModalOpen", oId: oId, status: status });
   }
 };
 
 export const deleteOrderReq = async (oId, dispatch) => {
   let responseData = await deleteOrder(oId);
-  console.log(responseData);
+  // console.log(responseData);
   if (responseData && responseData.success) {
     fetchData(dispatch);
   }

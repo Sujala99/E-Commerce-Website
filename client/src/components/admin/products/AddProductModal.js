@@ -85,7 +85,6 @@ const AddProductDetail = ({ categories }) => {
         }, 2000);
       }
     } catch (error) {
-      console.log(error);
     }
   };
 

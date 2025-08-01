@@ -23,7 +23,6 @@ const CategoryList = () => {
         setCategories(responseData.Categories);
       }
     } catch (error) {
-      console.log(error);
     }
   };
 
@@ -75,7 +74,6 @@ const FilterList = () => {
           dispatch({ type: "setProducts", payload: responseData.Products });
         }
       } catch (error) {
-        console.log(error);
       }
     } else {
       dispatch({ type: "loading", payload: true });
@@ -83,13 +81,11 @@ const FilterList = () => {
         setTimeout(async () => {
           let responseData = await productByPrice(price);
           if (responseData && responseData.Products) {
-            console.log(responseData.Products);
             dispatch({ type: "setProducts", payload: responseData.Products });
             dispatch({ type: "loading", payload: false });
           }
         }, 700);
       } catch (error) {
-        console.log(error);
       }
     }
   };
@@ -170,7 +166,6 @@ const Search = () => {
         }
       }, 700);
     } catch (error) {
-      console.log(error);
     }
   };
 

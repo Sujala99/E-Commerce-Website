@@ -31,7 +31,6 @@ const CartModal = () => {
         dispatch({ type: "cartTotalCost", payload: totalCost() });
       }
     } catch (error) {
-      console.log(error);
     }
   };
 

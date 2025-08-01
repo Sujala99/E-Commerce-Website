@@ -11,7 +11,6 @@ export const fetchData = async (cartListProduct, dispatch) => {
       }, 1000);
     }
   } catch (error) {
-    console.log(error);
   }
 };
 
@@ -23,10 +22,8 @@ export const fetchbrainTree = async (getBrainTreeToken, setState) => {
         clientToken: responseData.clientToken,
         success: responseData.success,
       });
-      console.log(responseData);
     }
   } catch (error) {
-    console.log(error);
   }
 };
 
@@ -39,7 +36,6 @@ export const pay = async (
   totalCost,
   history
 ) => {
-  console.log(state);
   if (!state.address) {
     setState({ ...state, error: "Please provide your address" });
   } else if (!state.phone) {
@@ -77,19 +73,15 @@ export const pay = async (
                   dispatch({ type: "loading", payload: false });
                   return history.push("/");
                 } else if (resposeData.error) {
-                  console.log(resposeData.error);
                 }
               } catch (error) {
-                console.log(error);
               }
             }
           })
           .catch((err) => {
-            console.log(err);
           });
       })
       .catch((error) => {
-        console.log(error);
         setState({ ...state, error: error.message });
       });
   }
