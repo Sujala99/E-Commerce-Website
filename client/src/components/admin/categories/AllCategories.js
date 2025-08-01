@@ -31,9 +31,9 @@ const AllCategory = (props) => {
   const deleteCategoryReq = async (cId) => {
     let deleteC = await deleteCategory(cId);
     if (deleteC.error) {
-      console.log(deleteC.error);
+      // console.log(deleteC.error);
     } else if (deleteC.success) {
-      console.log(deleteC.success);
+      // console.log(deleteC.success);
       fetchData();
     }
   };
