@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const { body } = require("express-validator");
 
 const authController = require("../controller/auth"); 
 const {
@@ -8,6 +7,9 @@ const {
   isAuth,
   isAdmin,
 } = require("../middleware/auth");
+
+
+const { body } = require("express-validator");
 
 router.post(
   "/signup",
@@ -22,7 +24,7 @@ router.post(
   ],
   authController.postSignup
 );
-router.post("/signin", authController.postSignin);
+outer.post("/signin", authController.postSignin);
 router.post("/forgot-password", authController.forgotPassword);
 router.post("/verify-otp", authController.verifyOtp);
 router.post("/reset-password", authController.resetPassword);
