@@ -14,3 +14,22 @@ Feature
   Audit logs and activity tracking
   HTTPS with secure cookies and sessions
 
+
+Tech Stack
+
+Frontend: React.js (optional, connect via CORS)
+Backend: Node.js, Express.js
+Database: MongoDB + Mongoose
+Security:
+Bcrypt for password hashing
+Session-based auth (express-session + MongoStore)
+Input sanitization (express-validator)
+HTTPS with certificates
+Helmet.js for securing HTTP headers
+Rate Limiting middleware
+
+Other Tools:
+Multer for file upload
+Morgan for request logging
+Nodemailer for OTP emails
+
